@@ -4,5 +4,29 @@ window.onload=function(){
     // console.log
     for(squarecount=0; squarecount<=squareAmount-1; squarecount++){
         squares.children[squarecount].setAttribute("class","square");
+        squares.children[squarecount].addEventListener('click', swapFunction);
     }
 }
+
+ function swapFunction(event){
+    index=Array.from(squares.children).indexOf(event.target);
+    if (currentPlayer==0){
+        squares.children[index].setAttribute("class","X square");
+        squares.children[index].innerHTML="X";
+        currentPlayer=1;
+    }
+    else{
+        squares.children[index].setAttribute("class","O square");
+        squares.children[index].innerHTML="O";
+        currentPlayer=0;
+    }
+    console.log(index);
+}
+
+var xmoves=[];
+var ymoves=[];
+
+var currentPlayer= 0;
+       
+
+
