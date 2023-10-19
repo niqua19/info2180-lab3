@@ -5,6 +5,9 @@ window.onload=function(){
     for(squarecount=0; squarecount<=squareAmount-1; squarecount++){
         squares.children[squarecount].setAttribute("class","square");
         squares.children[squarecount].addEventListener('click', swapFunction);
+        squares.children[squarecount].addEventListener('mouseover', hoverFunction);
+        squares.children[squarecount].addEventListener('mouseout', hoverFunction);
+
     }
 }
 
@@ -21,6 +24,15 @@ window.onload=function(){
         currentPlayer=0;
     }
     console.log(index);
+}
+
+function hoverFunction(event){
+    index=Array.from(squares.children).indexOf(event.target);
+    if(event.type == "mouseover"){
+        squares.children[index].setAttribute("class", squares.children[index].getAttribute("class") + " hover");
+    }else if(event.type == "mouseout"){
+        squares.children[index].classList.remove("hover");
+    }
 }
 
 var xmoves=[];
