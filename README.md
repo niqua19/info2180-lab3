@@ -1,2 +1,3 @@
+
 # info2180-lab3
-This is Lab 3 for <Sheniqua Johnson>
+This is Lab 3 for Sheniqua Johnson
