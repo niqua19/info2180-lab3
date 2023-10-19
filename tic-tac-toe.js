@@ -14,16 +14,35 @@ window.onload=function(){
  function swapFunction(event){
     index=Array.from(squares.children).indexOf(event.target);
     if (currentPlayer==0){
-        squares.children[index].setAttribute("class","X square");
+        squares.children[index].setAttribute("class",squares.children[index].getAttribute("class") + " X");
         squares.children[index].innerHTML="X";
         currentPlayer=1;
+        xmoves += String(index+1);
     }
     else{
-        squares.children[index].setAttribute("class","O square");
+        squares.children[index].setAttribute("class",squares.children[index].getAttribute("class") + " O");
         squares.children[index].innerHTML="O";
         currentPlayer=0;
+        omoves += String(index+1);
     }
-    console.log(index);
+
+    count = 0;
+
+    prevPlayer = [(currentPlayer == 0) ? omoves : xmoves, (currentPlayer == 0) ? "O" : "X"];
+
+    for(let space of winConditions){
+        for(let pos of space){
+            if(prevPlayer[0].includes(pos)){
+                count ++;
+            }
+        }
+        if(count == 3){
+            stat=document.getElementById("status");
+            stat.innerHTML="Congratulations! "+prevPlayer[1]+" is the Winner!";
+            stat.setAttribute("class",stat.getAttribute("class")+" you-won")
+        }
+        count = 0;
+    }
 }
 
 function hoverFunction(event){
@@ -35,10 +54,11 @@ function hoverFunction(event){
     }
 }
 
-var xmoves=[];
-var ymoves=[];
+var xmoves="";
+var omoves="";
 
 var currentPlayer= 0;
        
+winConditions=["123","456","789","147","258","369","357","159"]
 
 
