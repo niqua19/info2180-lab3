@@ -18,7 +18,7 @@ window.onload=function(){
 
  function swapFunction(event){
     index=Array.from(squares.children).indexOf(event.target);
-    // if (squares.children[index].innerHTML === "") { // Check if the square is empty
+    if (squares.children[index].innerHTML === "") { // Check if the square is empty
         if (currentPlayer==0){
             squares.children[index].setAttribute("class",squares.children[index].getAttribute("class") + " X");
             squares.children[index].innerHTML="X";
@@ -50,7 +50,7 @@ window.onload=function(){
             count = 0;
         }
     }
-//  }
+ }
     
     
 
