@@ -18,37 +18,41 @@ window.onload=function(){
 
  function swapFunction(event){
     index=Array.from(squares.children).indexOf(event.target);
-    if (currentPlayer==0){
-        squares.children[index].setAttribute("class",squares.children[index].getAttribute("class") + " X");
-        squares.children[index].innerHTML="X";
-        currentPlayer=1;
-        xmoves += String(index+1);
-    }
-    else{
-        squares.children[index].setAttribute("class",squares.children[index].getAttribute("class") + " O");
-        squares.children[index].innerHTML="O";
-        currentPlayer=0;
-        omoves += String(index+1);
-    }
-
-    count = 0;
-
-    prevPlayer = [(currentPlayer == 0) ? omoves : xmoves, (currentPlayer == 0) ? "O" : "X"];
-
-    for(let space of winConditions){
-        for(let pos of space){
-            if(prevPlayer[0].includes(pos)){
-                count ++;
-            }
+    if (squares.children[index].innerHTML === "") { // Check if the square is empty
+        if (currentPlayer==0){
+            squares.children[index].setAttribute("class",squares.children[index].getAttribute("class") + " X");
+            squares.children[index].innerHTML="X";
+            currentPlayer=1;
+            xmoves += String(index+1);
         }
-        if(count == 3){
-            stat=document.getElementById("status");
-            stat.innerHTML="Congratulations! "+prevPlayer[1]+" is the Winner!";
-            stat.setAttribute("class",stat.getAttribute("class")+" you-won")
+        else{
+            squares.children[index].setAttribute("class",squares.children[index].getAttribute("class") + " O");
+            squares.children[index].innerHTML="O";
+            currentPlayer=0;
+            omoves += String(index+1);
         }
+
         count = 0;
+
+        prevPlayer = [(currentPlayer == 0) ? omoves : xmoves, (currentPlayer == 0) ? "O" : "X"];
+
+        for(let space of winConditions){
+            for(let pos of space){
+                if(prevPlayer[0].includes(pos)){
+                    count ++;
+                }
+            }
+            if(count == 3){
+                stat=document.getElementById("status");
+                    stat.innerHTML="Congratulations! "+prevPlayer[1]+" is the Winner!";
+            stat.setAttribute("class",stat.getAttribute("class")+" you-won")
+            }
+            count = 0;
+        }
     }
-}
+ }
+    
+    
 
 function hoverFunction(event){
     index=Array.from(squares.children).indexOf(event.target);
