@@ -7,8 +7,13 @@ window.onload=function(){
         squares.children[squarecount].addEventListener('click', swapFunction);
         squares.children[squarecount].addEventListener('mouseover', hoverFunction);
         squares.children[squarecount].addEventListener('mouseout', hoverFunction);
-
+    
     }
+    // Create a reset button
+    var resetButton = document.createElement('button');
+    resetButton.textContent = 'Reset Game';
+    resetButton.addEventListener('click', resetFunction);
+    document.body.appendChild(resetButton);
 }
 
  function swapFunction(event){
@@ -62,3 +67,22 @@ var currentPlayer= 0;
 winConditions=["123","456","789","147","258","369","357","159"]
 
 
+function resetFunction(){
+    // Clear the moves arrays
+    xmoves = "";
+    omoves = "";
+
+    // Reset the currentPlayer to X
+    currentPlayer = 0;
+
+    // Clear the board
+    for (squarecount = 0; squarecount < squareAmount; squarecount++) {
+        squares.children[squarecount].setAttribute("class", "square");
+        squares.children[squarecount].innerHTML = "";
+    }
+
+    // Reset the status message
+    stat = document.getElementById("status");
+    stat.innerHTML = "Move your mouse over a square and click to play an X or an O.";
+    stat.classList.remove("you-won");
+}
